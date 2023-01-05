@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:student_record_provider/providers/students_provider.dart';
-import 'package:student_record_provider/screens/home_screen.dart';
+import 'package:student_record_provider/screens/home_screen/home_screen.dart';
 
 import 'models/student_model.dart';
 
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => StudentProvider())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,

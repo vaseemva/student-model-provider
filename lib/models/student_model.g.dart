@@ -21,13 +21,14 @@ class StudentListAdapter extends TypeAdapter<StudentList> {
       age: fields[1] as String?,
       batch: fields[2] as String?,
       domain: fields[3] as String?,
+      id: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, StudentList obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class StudentListAdapter extends TypeAdapter<StudentList> {
       ..writeByte(2)
       ..write(obj.batch)
       ..writeByte(3)
-      ..write(obj.domain);
+      ..write(obj.domain)
+      ..writeByte(4)
+      ..write(obj.id);
   }
 
   @override

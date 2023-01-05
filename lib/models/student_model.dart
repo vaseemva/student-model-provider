@@ -4,16 +4,19 @@ part 'student_model.g.dart';
 @HiveType(typeId: 0)
 class StudentList extends HiveObject {
   @HiveField(0)
-  final String? name;
+   String? name;
 
   @HiveField(1)
-  final String? age;
+   String? age;
 
   @HiveField(2)
-  final String? batch;
+  String? batch;
 
   @HiveField(3)
-  final String? domain;
+   String? domain;
+
+  @HiveField(4)
+  String? id; 
 
   
   StudentList(
@@ -21,5 +24,6 @@ class StudentList extends HiveObject {
       required this.age,
       required this.batch,
       required this.domain,
+      required this.id
       });
 }
