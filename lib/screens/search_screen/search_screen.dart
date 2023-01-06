@@ -13,7 +13,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final students = Provider.of<StudentProvider>(context);
-    List<StudentList> hh = students.getMatchingStudents(_searchController.text);
+    List<StudentList> searchResults = students.getMatchingStudents(_searchController.text);
     return Scaffold(
         appBar: AppBar(
           title: SearchBar(searchController: _searchController),
@@ -23,19 +23,19 @@ class SearchScreen extends StatelessWidget {
                 child: Text('Enter a search keyword'),
               )
             : ListView.builder(
-                itemCount: hh.length,
+                itemCount: searchResults.length,
                 itemBuilder: (context, index) {
                   // return ListTile(
-                  //     title: Text(hh[index].name.toString()),
-                  //     subtitle: Text(hh[index].age.toString()));
+                  //     title: Text(searchResults[index].name.toString()),
+                  //     subtitle: Text(searchResults[index].age.toString()));
                   return ListTile(
                     leading: const CircleAvatar(
                       backgroundImage: AssetImage('assets/R.png'),
                     ),
                     // title: Text(value.studentLists[index].name.toString()),
                     // subtitle: Text(value.studentLists[index].age.toString()),
-                    title: Text(hh[index].name.toString()),
-                    subtitle: Text(hh[index].age.toString()),
+                    title: Text(searchResults[index].name.toString()),
+                    subtitle: Text(searchResults[index].age.toString()),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -47,7 +47,7 @@ class SearchScreen extends StatelessWidget {
                                   builder: (context) => EditStudentScreen(),
                                   settings: RouteSettings(
                                     // arguments: value.studentLists[index],
-                                    arguments: hh[index],
+                                    arguments: searchResults[index],
                                   ),
                                 ),
                               );
@@ -60,7 +60,7 @@ class SearchScreen extends StatelessWidget {
                             onPressed: () {
                               //  value.studentLists[index].delete();
                               students.deleteStudent(
-                                  students.students.indexOf(hh[index]));
+                                  students.students.indexOf(searchResults[index]));
                             },
                             icon: const Icon(
                               Icons.delete,
@@ -74,7 +74,7 @@ class SearchScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => const StudentDetailScreen(),
                           settings: RouteSettings(
-                            arguments: hh[index],
+                            arguments: searchResults[index],
                           ),
                         ),
                       );

@@ -9,7 +9,7 @@ import 'package:student_record_provider/screens/student_detail/student_detail_sc
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     final studentspro = Provider.of<StudentProvider>(context);
@@ -33,81 +33,80 @@ class HomeScreen extends StatelessWidget {
       ),
       // body: Consumer<StudentProvider>(
       //   builder: (context, value, _) =>
-       body:  ListView.builder(
-            itemBuilder: (context, index) {
-              // value.getStudents();
-              // if (value.studentLists.isEmpty) {
-              //   return const Center(
-              //     child: Text(
-              //       'No students',
-              //       textAlign: TextAlign.center,
-              //     ),
-              //   );
-              // }
-              if (studentsList.isEmpty) {
-                return const Center(
-                  child: Text(
-                    'No students',
-                    textAlign: TextAlign.center,
+      body: ListView.builder(
+          itemBuilder: (context, index) {
+            // value.getStudents();
+            // if (value.studentLists.isEmpty) {
+            //   return const Center(
+            //     child: Text(
+            //       'No students',
+            //       textAlign: TextAlign.center,
+            //     ),
+            //   );
+            // }
+            if (studentsList.isEmpty) {
+              return const Center(
+                child: Text(
+                  'No students',
+                ),
+              );
+            }
+            return ListTile(
+              leading: const CircleAvatar(
+                backgroundImage: AssetImage('assets/R.png'),
+              ),
+              // title: Text(value.studentLists[index].name.toString()),
+              // subtitle: Text(value.studentLists[index].age.toString()),
+              title: Text(studentsList[index].name.toString()),
+              subtitle: Text(studentsList[index].age.toString()),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditStudentScreen(),
+                            settings: RouteSettings(
+                              // arguments: value.studentLists[index],
+                              arguments: studentsList[index],
+                            ),
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.edit,
+                        color: Colors.blue,
+                      )),
+                  IconButton(
+                      onPressed: () {
+                        //  value.studentLists[index].delete();
+                        studentspro.deleteStudent(index);
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      )),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const StudentDetailScreen(),
+                    settings: RouteSettings(
+                      // arguments: value.studentLists[index],
+                      arguments: studentsList[index],
+                    ),
                   ),
                 );
-              }
-              return ListTile(
-                leading: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/R.png'),
-                ),
-                // title: Text(value.studentLists[index].name.toString()),
-                // subtitle: Text(value.studentLists[index].age.toString()),
-                title: Text(studentsList[index].name.toString()),
-                subtitle: Text(studentsList[index].age.toString()),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditStudentScreen(),
-                              settings: RouteSettings(
-                                // arguments: value.studentLists[index],
-                                arguments: studentsList[index],
-                              ),
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.blue,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          //  value.studentLists[index].delete();
-                          studentspro.deleteStudent(index);
-                        },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        )),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const StudentDetailScreen(),
-                      settings: RouteSettings(
-                        // arguments: value.studentLists[index],
-                        arguments: studentsList[index],
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-            itemCount:
-                //  value.studentLists.length,
-                studentsList.length),
+              },
+            );
+          },
+          itemCount:
+              //  value.studentLists.length,
+              studentsList.length),
       // ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Add student'),
